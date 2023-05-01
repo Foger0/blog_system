@@ -7,6 +7,7 @@
     <title>博客详情页</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/blog_detail.css">
+    <link rel="stylesheet" href="editor.md/css/editormd.min.css" />
 </head>
 <body>
     <!-- 导航栏 -->
@@ -43,28 +44,46 @@
         <!-- 右侧信息 -->
         <div class="container-right">
             <!-- 博客标题 -->
-            <h3 class="title">我的第一篇博客</h3>
+            <h3 class="title"></h3>
             <!-- 博客发布时间 -->
-            <div class="date">2023-02-27</div>
+            <div class="date"></div>
             <!-- 博客正文 -->
-            <div class="content">
-                <p>
-                    从今天开始, 我要认真敲代码 Lorem ipsum dolor sit amet consectetur adipisicing elit. At tenetur voluptatem voluptatibus nostrum itaque corrupti illum, quisquam distinctio labore expedita. Rem laboriosam repellat esse quia minima optio obcaecati alias eum.
-                    从今天开始, 我要认真敲代码 Lorem ipsum dolor sit amet consectetur adipisicing elit. At tenetur voluptatem voluptatibus nostrum itaque corrupti illum, quisquam distinctio labore expedita. Rem laboriosam repellat esse quia minima optio obcaecati alias eum.
-                    从今天开始, 我要认真敲代码 Lorem ipsum dolor sit amet consectetur adipisicing elit. At tenetur voluptatem voluptatibus nostrum itaque corrupti illum, quisquam distinctio labore expedita. Rem laboriosam repellat esse quia minima optio obcaecati alias eum.
-                </p>
-                <p>
-                    从今天开始, 我要认真敲代码 Lorem ipsum dolor sit amet consectetur adipisicing elit. At tenetur voluptatem voluptatibus nostrum itaque corrupti illum, quisquam distinctio labore expedita. Rem laboriosam repellat esse quia minima optio obcaecati alias eum.
-                    从今天开始, 我要认真敲代码 Lorem ipsum dolor sit amet consectetur adipisicing elit. At tenetur voluptatem voluptatibus nostrum itaque corrupti illum, quisquam distinctio labore expedita. Rem laboriosam repellat esse quia minima optio obcaecati alias eum.
-                    从今天开始, 我要认真敲代码 Lorem ipsum dolor sit amet consectetur adipisicing elit. At tenetur voluptatem voluptatibus nostrum itaque corrupti illum, quisquam distinctio labore expedita. Rem laboriosam repellat esse quia minima optio obcaecati alias eum.
-                </p>
-                <p>
-                    从今天开始, 我要认真敲代码 Lorem ipsum dolor sit amet consectetur adipisicing elit. At tenetur voluptatem voluptatibus nostrum itaque corrupti illum, quisquam distinctio labore expedita. Rem laboriosam repellat esse quia minima optio obcaecati alias eum.
-                    从今天开始, 我要认真敲代码 Lorem ipsum dolor sit amet consectetur adipisicing elit. At tenetur voluptatem voluptatibus nostrum itaque corrupti illum, quisquam distinctio labore expedita. Rem laboriosam repellat esse quia minima optio obcaecati alias eum.
-                    从今天开始, 我要认真敲代码 Lorem ipsum dolor sit amet consectetur adipisicing elit. At tenetur voluptatem voluptatibus nostrum itaque corrupti illum, quisquam distinctio labore expedita. Rem laboriosam repellat esse quia minima optio obcaecati alias eum.
-                </p>
-            </div>
+             <div id="content">
+
+             </div>
         </div>
     </div>
+<script src="js/jquery.min.js"></script>
+
+    <script src="editor.md/lib/marked.min.js"></script>
+    <script src="editor.md/lib/prettify.min.js"></script>
+    <script src="editor.md/editormd.js"></script>
+<script>
+    $.ajax({
+        type:'get',
+        url:'blog'+location.search,
+        success:function(body){
+            let titleDiv = document.querySelector('.container-right .title');
+            titleDiv.innerHTML=body.title;
+            let dateDiv=document.querySelector('.date');
+            dateDiv.innerHTML=body.postTime;
+            editormd.markdownToHTML('content', { markdown: body.content });
+        }
+    })
+    function checkLogin(){
+            $.ajax({
+                type:'get',
+                url:'login',
+                suceess:function(body){
+                    if(body.userId&&body.userId>0){
+                        console.log("当前用户已经登录!!")
+                    }else{
+                        location.assign('login.html');
+                }
+             }
+            });
+        }
+        checkLogin();
+</script>
 </body>
 </html>

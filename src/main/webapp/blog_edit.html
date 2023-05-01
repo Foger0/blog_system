@@ -50,6 +50,20 @@
             // 指定 editor.md 依赖的插件路径
             path: "editor.md/lib/"
         });
+        function checkLogin(){
+            $.ajax({
+                type:'get',
+                url:'login',
+                suceess:function(body){
+                    if(body.userId&&body.userId>0){
+                        console.log("当前用户已经登录!!")
+                    }else{
+                        location.assign('login.html');
+                }
+             }
+            });
+        }
+        checkLogin();
     </script>
 </body>
 </html>

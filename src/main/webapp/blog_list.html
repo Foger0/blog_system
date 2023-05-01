@@ -81,6 +81,21 @@
             });
         }
         getBlogs();
+        function checkLogin(){
+            $.ajax({
+                type:'get',
+                url:'login',
+                success:function(body){
+                    if(body.userId&&body.userId>0){
+                        console.log("当前用户已经登录!!");
+                    }else{
+                        console.log("当前用户未登录!!");
+                        location.assign('login.html');
+                }
+             }
+            });
+        }
+        checkLogin();
     </script>
 </body>
-</html>
+</html>c

@@ -36,7 +36,7 @@ return null;
         ResultSet resultSet=null;
         try {
             connection = DBUtil.getConnection();
-            String sql="select*from user where userId=?";
+            String sql="select*from user where username=?";
             statement=connection.prepareStatement(sql);
             statement.setString(1,username);
             resultSet=statement.executeQuery();

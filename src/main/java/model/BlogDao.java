@@ -34,6 +34,7 @@ public class BlogDao {
         try {
             connection=DBUtil.getConnection();
             String sql="select*from blog where blogId=?";
+            statement=connection.prepareStatement(sql);
             statement.setInt(1,blogId);
             resultSet=statement.executeQuery();
             if(resultSet.next()){
@@ -43,6 +44,7 @@ public class BlogDao {
                 blog.setContent(resultSet.getString("content"));
                 blog.setPostTime(resultSet.getTimestamp("postTime"));
                 blog.setUserId(resultSet.getInt("userId"));
+                return blog;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
