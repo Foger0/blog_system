@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class DBUtil {
     private static DataSource dataSource=new MysqlDataSource();
     static {
-        ((MysqlDataSource)dataSource).setUrl("jdbc:mysql://127.0.0.1:3306/blog_system?character=utf8&useSSL=false");
+        ((MysqlDataSource)dataSource).setUrl("jdbc:mysql://127.0.0.1:3306/blog_system?characterEncoding=utf8&useSSL=false");
         ((MysqlDataSource)dataSource).setUser("root");
         ((MysqlDataSource)dataSource).setPassword("dxy19660");
 

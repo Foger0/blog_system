@@ -14,7 +14,7 @@ public class BlogDao {
         PreparedStatement statement=null;
         try {
             connection=DBUtil.getConnection();
-            String sql="insert into blog values()null,?,?,?,?)";
+            String sql="insert into blog values(null,?,?,?,?)";
             statement=connection.prepareStatement(sql);
             statement.setString(1,blog.getTitle());
             statement.setString(2,blog.getContent());

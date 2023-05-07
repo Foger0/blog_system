@@ -55,4 +55,20 @@ return null;
         return null;
 
     }
+    public  void add(User user){
+        Connection connection=null;
+        PreparedStatement statement=null;
+        try {
+            connection=DBUtil.getConnection();
+            String sql="insert into user values(null,?,?)";
+            statement=connection.prepareStatement(sql);
+            statement.setString(1,user.getUsername());
+            statement.setString(2,user.getPassword());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(connection, statement,null);
+        }
+    }
 }
